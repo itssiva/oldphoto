@@ -1,0 +1,48 @@
+{% extends "./space/base_space.html" %}
+{% block title %}
+老照片 - {{view_user.username}}的收藏
+{% endblock %}
+
+{% block layoutmid %}
+<!-- -->
+		<p class="greentitle">{{view_user.username}}的收藏</p>
+		<br/>
+<table>
+  <tr>
+    <td>
+	<div class="piclist">
+	<ul>
+	{% for o in object_list %}
+		<li>
+		          <div>
+		    <a href="/photos/{{o.photo.id}}/">
+		    <img src="{{o.photo.thumb_big_photo_url}}" alt="{{o.photo.title}}"></a>
+		          <br>
+		          <a>浏览({{o.photo.view_count}})</a> | <a>回复({{o.photo.rep_count}})</a>
+		          </div>
+		</li>		
+	{% endfor %}
+	</ul>
+	<br class="clear">
+	</div>
+	</td>
+  </tr>
+</table>
+<form method="get" name="pform" action="">
+<div id="pagination" style="float:right">
+	<a>{{page}}/{{pages}} 页</a>
+	<input name="page" size="4" maxlength="255" value="1" id="pg" type="text">
+	<em onclick="document.pform.submit(); return false;">GO</em>
+</div>
+</form>
+<div id="pagination">
+	{% if has_previous %}
+		<a href="/space/collections/{{view_user.id}}/?page=1">首页</a>
+		<a href="/space/collections/{{view_user.id}}/?page={{ previous }}">上一页</a>
+	{% endif %} {% if has_next %}
+		<a href="/space/collections/{{view_user.id}}/?page={{ next }}">下一页</a>
+		<a href="/space/collections/{{view_user.id}}/?page={{pages}}">尾页</a>	
+	{% endif %}
+</div>
+<!-- -->
+{% endblock %}

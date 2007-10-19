@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}
+站内消息 - 我的信箱
+{% endblock %}
+{% block ext_style %}
+#layoutmid {margin-left: 70px; min-height: 300px; margin-right: 70px;}#layoutright { width: 60px;}
+#layoutleft {width: 60px;}
+{% endblock %}
+
+{% block breadcrumb %}
+<span><a href="/">首页</a></span>&gt;
+<span><a href="/space/{{user.id}}/">个人中心</a></span>&gt;
+<span id="breadcurrent">我的信箱</span> 
+{% endblock %}
+
+{% block layoutmid_content %}
+		<div id="content">
+			<div id="content_list">
+<div id="second_nav" class="bgyw roundC">
+<li><a href="/msgbox/compose_message">写信件</a></li>
+<li>|</li>
+<li>我的信箱</li>
+<li>|</li>
+<li><a href="/msgbox/outbox">已寄出信件</a></li>
+</div>
+
+<form name="bform" id="bform" action="" method="post">
+<table class="msglist">
+	<tbody><tr>
+		<th style="width: 20px;" align="left">
+		<input id="all_check" name="all_check" value="" onclick="checkAll(this)" type="checkbox">
+		</th>
+		<th style="width: 250px;">主题</th>
+		<th style="width: 120px;">发信人</th>
+		<th style="width: 150px;">时间</th>
+	</tr>
+{% for o in object_list %}
+			<tr class="{% cycle null,shaded %}">
+				<td><input name="ids" type="checkbox" value="{{o.id}}"></td>
+				<td>{%if not o.has_read%}<b>{%endif%}
+					<a href="/msgbox/view_message/{{o.id}}/">{{o.title}}</a>
+					{%if not o.has_read%}</b>{%endif%}
+				</td>
+				<td align="center">{{o.send_user.username}}</td>
+				<td align="center">{{o.modification_date}}</td>
+			</tr>
+{% endfor %}
+			</tbody></table>
+<a class="mButton" onclick="document.bform.submit();return false;" href="">删除选中的信件</a>
+</form>
+
+			</div>
+		</div>
+{% endblock %}

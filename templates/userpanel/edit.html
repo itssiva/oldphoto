@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title_descn %}更新个人信息{% endblock %}
+
+{% block ext_style %}
+#layoutmid {margin-left: 130px; min-height: 300px; margin-right: 130px;}#layoutright { width: 120px;}
+#layoutleft {width: 120px;}
+{% endblock %}
+
+{% block breadcrumb %}
+<span><a href="/">首页</a></span>&gt;
+<span><a href="/space/{{user.id}}/">个人中心</a></span>&gt;
+<span id="breadcurrent">更换个人信息</span> 
+{% endblock %}
+
+﻿{% block layoutmid_content %}
+		<div id="content">
+			<div id="content_list">
+<form name="uuform" id="uuform" action="/userpanel/edit/" method="post"><fieldset class="login">
+<legend>更新您的个人信息设置</legend>
+	<div>
+		<label for="UserPermaName">永久用户名</label>
+		{{user}}
+	</div>
+	<div>
+		<label for="UserBlogUrl">您的性别</label>
+		{{form.gender}}
+		{% if form.gender.errors %}<span style="color: #FF0000;"> *** {{ form.gender.errors|join:", " }}</span>{% endif %} 
+	</div>
+ 	<div>
+		<label for="UserBlogUrl">您的BLOG(包括http://部分)</label>
+		{{form.blog}}
+		{% if form.blog.errors %}<span style="color: #FF0000;"> *** {{ form.blog.errors|join:", " }}</span>{% endif %} 
+	</div>
+	<div>
+		<label for="UserDescription">您的简介</label>
+		{{form.intro}}
+		{% if form.intro.errors %}<span style="color: #FF0000;"> *** {{ form.intro.errors|join:", " }}</span>{% endif %}
+    </div>
+	 <div class="submit"> 
+	 <a href='' class="mButton" onClick="document.uuform.submit(); return false;">更新个人信息</a>
+	 <a class="mButton" href="javascript:history.back()">取消</a>
+	</div>	
+</fieldset>	   
+</form>
+			</div>
+		</div>
+{% endblock %}

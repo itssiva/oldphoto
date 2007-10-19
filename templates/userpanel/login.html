@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title_descn %}登录{% endblock %}
+
+{% block ext_style %}
+#layoutmid {margin-left: 130px; min-height: 300px; margin-right: 130px;}#layoutright { width: 120px;}
+#layoutleft {width: 120px;}
+{% endblock %}
+{% block layoutmid_content %}
+				<div id="content">
+<div id="content_list">
+<form action="/userpanel/login/" method="post" name="sform" id="sform"> 
+<fieldset class="login">
+<legend>登录</legend>
+		{% if errorMsg %}
+		<div class="errorMsg">
+			{{errorMsg}}
+		</div> 
+		{% endif %}
+		<div>
+			<label>您的用户名</label>
+			{{form.username}}
+			{% if form.username.errors %}<span style="color: #FF0000;"> *** {{ form.username.errors|join:", " }}</span>{% endif %}
+		</div>
+		<div>
+			<label>密码</label>
+			{{form.password}}
+			{% if form.password.errors %}<span style="color: #FF0000;"> *** {{ form.password.errors|join:", " }}</span>{% endif %}    
+		</div>
+    <div class="submit">
+    	<input class="mButton" id="submit" type="submit" name="sa" value="登录"/> 
+    </div>
+	 <div class="submit">
+	    <a href="/userpanel/signup/">还没有注册？ 注册只需要10秒，点击这里开始。</a>
+     </div>    
+</fieldset>	   
+</form>
+</div>
+</div>
+{% endblock %}

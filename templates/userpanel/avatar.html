@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title_descn %}更新头像{% endblock %}
+
+{% block ext_style %}
+#layoutmid {margin-left: 130px; min-height: 300px; margin-right: 130px;}#layoutright { width: 120px;}
+#layoutleft {width: 120px;}
+{% endblock %}
+
+{% block breadcrumb %}
+<span><a href="/">首页</a></span>&gt;
+<span><a href="/space/{{user.id}}/">个人中心</a></span>&gt;
+<span id="breadcurrent">更换头像</span> 
+{% endblock %}
+
+{% block layoutmid_content %}
+		<div id="content">
+			<div id="content_list">
+<form action="/userpanel/avatar/" method="post" name="sform" enctype="multipart/form-data">
+<fieldset class="login">
+<legend>上传图片</legend>
+<div id="second_nav">
+	当前的图片：
+	<div style="text-align: center;"><img class="img_border" src="{{user.get_profile.get_avatar}}"></div>
+</div>
+<div class="item">
+	<lable>我们支持GIF，JPG/JPEG和PNG格式的图片。系统将自动调整图片的大小。请选择需要上传的文件。<br>
+		{{form.avatar}}
+	</lable>
+</div>
+<div class="submit">
+	<a href="" class="mButton" onclick="document.sform.submit(); return false;">
+	上传图片</a>
+	<a href="javascript:history.back()" class="mButton">取消</a>
+</div>
+</fieldset>
+</form>
+			</div>
+		</div>
+{% endblock %}

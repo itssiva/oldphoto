@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title_descn %}最新点评{% endblock %}
+
+{% block ext_style %}
+#layoutmid {margin-left: 70px; min-height: 300px; margin-right: 70px;}#layoutright { width: 60px;}
+#layoutleft {width: 60px;}
+{% endblock %}
+
+{% block layoutmid %}
+<div id="content">
+<div class="bggrey roundC myBox">
+<h3>最新点评</h3>
+</div>
+<div id="comments">
+	<table class="mtable">
+	<tbody><tr>
+		<th>内容</th>
+		<th>评论人</th>
+		<th>时间</th>
+		<th>图片</th>
+		<th>所有者</th>
+	</tr>
+	{% for c in object_list %}
+		<tr class="{% cycle null,bggrey %}">
+			<td><a href="/photos/{{c.photo.id}}/#beginComment">{{c.get_short_comment}}</a></td>
+			<td><a href="/space/{{c.author.id}}/">{{c.author.username}}</a></td>
+			<td>{{c.create_date}}</td>
+			<td><a href="/photos/{{c.photo.id}}/"><img alt="{{c.photo.title}}" src="{{c.photo.thumb_small_photo_url}}"></a></td>
+			<td><a href="/space/{{c.photo.user.id}}/">{{c.photo.user.username}}</a></td>
+		</tr>
+	{% endfor %}
+	</tbody></table>
+</div>
+<br>
+<form method="get" name="pform" action="">
+<div id="pagination" style="float:right">
+	<a>{{page}}/{{pages}} 页</a>
+	<input name="page" size="4" maxlength="255" value="1" id="pg" type="text">
+	<em onclick="document.pform.submit(); return false;">GO</em>
+</div>
+</form>
+<div id="pagination">
+{% if has_previous %}
+	<a href="/allcomments/?page=1">首页</a>
+	<a href="/allcomments/?page={{ previous }}">上一页</a>
+{% endif %} {% if has_next %}
+	<a href="/allcomments/?page={{ next }}">下一页</a>
+	<a href="/allcomments/?page={{pages}}">尾页</a>	
+{% endif %}
+</div>
+</div>
+{% endblock %}

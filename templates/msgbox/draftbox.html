@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}
+站内消息 - 信件草稿
+{% endblock %}
+{% block ext_style %}
+#layoutmid {margin-left: 70px; min-height: 300px; margin-right: 70px;}#layoutright { width: 60px;}
+#layoutleft {width: 60px;}
+{% endblock %}
+
+{% block breadcrumb %}
+<span><a href="/">首页</a></span>&gt;
+<span><a href="/space/{{user.id}}/">个人中心</a></span>&gt;
+<span id="breadcurrent">信件草稿</span> 
+{% endblock %}
+
+{% block layoutmid_content %}
+		<div id="content">
+			<div id="content_list">
+<div id="second_nav" class="bgyw roundC">
+<li><a href="/msgbox/compose_message">写信件</a></li>
+<li>|</li>
+<li><a href="/msgbox/inbox">我的信箱</a></li>
+<li>|</li>
+<li><a href="/msgbox/outbox">已寄出信件</a></li>
+<li>|</li>
+<li>信件草稿</li>
+</div>
+
+<form name="bform" id="bform" action="/space/inbox" method="post">
+<table class="msglist">
+	<tbody><tr>
+		<th style="width: 20px;" align="left"><input id="all_check" name="all_check" value="" onclick="checkAll()" type="checkbox"></th>
+		<th style="width: 250px;">主题</th>
+		<th style="width: 120px;">发信人</th>
+		<th style="width: 150px;">时间</th>
+	</tr>
+{% for o in object_list %}
+			<tr class="{% cycle null,shaded %}">
+				<td><input name="data[3056]" type="checkbox"></td>
+				<td><a href="/msgbox/view_message/{{o.id}}/">{{o.title}}</a></td>
+				<td align="center">{{o.send_user.username}}</td>
+				<td align="center">{{o.modification_date}}</td>
+			</tr>
+{% endfor %}
+
+	</tbody></table>
+<a class="mButton" onclick="document.bform.submit();return false;" href="">删除选中的信件</a>
+</form>
+
+			</div>
+		</div>
+{% endblock %}

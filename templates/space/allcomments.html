@@ -1,0 +1,41 @@
+{% extends "./space/base_space.html" %}
+{% block title %}
+老照片 - {{view_user.username}}写过的评论
+{% endblock %}
+{% block layoutmid %}
+<div id="comments">
+<p class="greentitle">{{view_user.username}}写过的评论</p>
+	<table class="mtable">
+		<tbody><tr>
+			<th>内容</th>
+			<th>时间</th>
+			<th>图片</th>
+			<th>所有者</th>
+		</tr>
+		{% for c in object_list %}
+			<tr class="{% cycle null,bggrey %}">
+				<td><a href="/photos/{{c.photo.id}}/#beginComment">{{c.comment}}</a></td>
+				<td>{{c.create_date}}</td>
+				<td><a href="/photos/{{c.photo.id}}/"><img src="{{c.photo.thumb_small_photo_url}}" alt="{{c.photo.title}}"></a></td>
+				<td><a href="/space/{{c.author.id}}/">{{c.author.username}}</a></td>
+			</tr>
+		{% endfor %}
+		</tbody></table>
+<form method="get" name="pform" action="">
+<div id="pagination" style="float:right">
+	<a>{{page}}/{{pages}} 页</a>
+	<input name="page" size="4" maxlength="255" value="1" id="pg" type="text">
+	<em onclick="document.pform.submit(); return false;">GO</em>
+</div>
+</form>
+<div id="pagination">
+	{% if has_previous %}
+		<a href="/space/allcomments/{{view_user.id}}/?page=1">首页</a>
+		<a href="/space/allcomments/{{view_user.id}}/?page={{ previous }}">上一页</a>
+	{% endif %} {% if has_next %}
+		<a href="/space/allcomments/{{view_user.id}}/?page={{ next }}">下一页</a>
+		<a href="/space/allcomments/{{view_user.id}}/?page={{pages}}">尾页</a>	
+	{% endif %}	
+</div>
+</div>
+{% endblock %}

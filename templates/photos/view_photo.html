@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+{% block title_descn %}{{photo.title}}{% endblock %}
+{% block ext_style %}
+#layoutmid {margin-left: 20px; min-height: 300px; margin-right: 260px;}#layoutright { width: 250px;}
+#layoutleft {width: 10px;}
+{% endblock %}
+{% block ext_js_head %}
+function ImgAutoSize(img) {
+	max_width=600;
+	if (img.width>max_width) {
+		img.height=img.height*max_width/img.width;
+		img.width=max_width;
+	}
+}
+function ImgAutoSize_ext(img) {
+	ImgAutoSize(img)	
+	img.style.display=''
+	ImgAutoSize(img)
+}
+{% endblock %}
+{% block layoutmid %}
+<h3><p class="greentitle"> {{photo.title}} </p></h3>
+<div class="item">
+	<a target="_blank" href="{{photo.get_photo_url}}"><img style="display:none" onload="ImgAutoSize_ext(this)" src="{{photo.get_photo_url}}" alt="{{photo.title}}"></img></a>
+<br>
+<p class="itemfrom">
+	浏览次数：{{photo.view_count}}
+	<br>
+    所有者: <a target="_blank" href="/space/{{photo.user.id}}/">{{photo.user.username}}</a>
+	<a target="_blank" href="/space/{{photo.user.id}}/">
+		<img class="avatar" src="{{photo.user.get_profile.get_avatar}}">
+	</a>
+	{% if photo.user.get_profile.blog %}
+	(<a href="photo.user.get_profile.blog" rel="nofollow" target="_blank">Blog</a>)
+	{% endif %}
+    &nbsp;|&nbsp;
+	发表时间：{{photo.create_date}}
+	<br>
+	tags：
+	{% for tag in photo.get_sorted_tags %}
+	<a href="/tags/{{tag.id}}/">{{tag.name}}</a>({{tag.obj_count}}) 
+	{% endfor %}
+</p>
+</div>
+
+<div class="item">
+	<p class="greentitle"> 相片说明 </p>
+	<div class="itembody">
+	{{photo.descn}}
+	</div>
+</div>
+
+<div class="item">
+	<h3>{{photo.rep_count}}条评论&nbsp;|&nbsp;<a name="beginComment" href="#newComment">添加评论</a></h3>
+	<ul class="comments">
+	{% for c in comments %}
+		<li>
+			<a href="/space/{{c.author.id}}/">
+				<img class="comment_avatar" src="{{c.author.get_profile.get_avatar}}">
+			</a>
+			<div class="comment">
+				<p class="commenter">
+					<a href="/space/{{c.author.id}}/">
+						{{c.author.username}}
+					</a>
+				</p>
+				<p class="content"> {{c.comment}} </p>
+				<p class="date">
+					{{c.create_date}}
+					{% if c.author.get_profile.blog %}
+					&nbsp;|&nbsp;<a href="{{c.author.get_profile.blog}}" rel="nofollow" target="_blank">Blog</a>
+					{% endif %}
+				</p>
+				{%if user.is_superuser%}
+				<div align="right">
+				<a href="/photos/comment/delete/{{c.id}}/">删除</a>
+				{%if c.is_show%}
+				<a href="/photos/comment/hidden/{{c.id}}/">隐藏</a>
+				{%else%}
+				<a href="/photos/comment/show/{{c.id}}/">显示</a>
+				{%endif%}
+				</div>
+				{%endif%}
+			</div>
+		</li>
+	{% endfor %}
+	</ul>
+	<h3>添加评论</h3>
+	<div id="new_comment">
+	{% if not user or user.is_anonymous %}
+	<p>只有<a href='/userpanel/login/'>登录</a>后才能发布评论。注册只需要10秒，现在<a href='/userpanel/signup/'>注册</a>。</p><br/>
+	<p><a href='/userpanel/signup/' class="mButton">注册</a>  <a href='/userpanel/login/' class="mButton">登录</a></p>
+	{% else %}
+		<form name="ncform" id="ncform" action="" method="post">
+			<div class="inner">
+				{{form.comment}}
+				{% if form.descn.errors %}
+				<!-- style="display: none;" -->
+				<div class="errorMsg" id="commentErrMsg">{{ form.photo.errors|join:", " }}</div>
+				{% endif %}
+				<div class="submit">
+					<a href='' name="newComment"  class="mButton" onClick="document.ncform.submit(); return false;">提交</a>
+				</div>
+			</div>
+		</form>
+	</div>
+	{% endif %}
+</div>
+{% endblock %}
+
+{% block layoutright %}
+<div id="rightSide">
+<div class="panel">
+	<h3>所有者</h3>
+	<p class="smalltxt">
+		<a target="_blank" href="/space/{{photo.user.id}}/">
+			<img class="avatar img_border" src="{{photo.user.get_profile.get_avatar}}">
+		</a>		
+		<a target="_blank" href="/space/{{photo.user.id}}/">{{photo.user.username}}</a>
+		{% if photo.user.get_profile.blog %}
+		(<a href="{{photo.user.get_profile.blog}}" rel="nofollow" target="_blank">Blog</a>)
+		{% endif %}
+	</p>
+</div>
+
+<div class="panel">
+	<h3>操作</h3>
+	<p class="smalltxt">
+	{% if user.is_authenticated %}
+		{%if not has_collection%}
+		<a href="/photos/collection/{{photo.id}}/">收藏</a>
+		&nbsp;&nbsp;
+		{%else%}
+		<a href="/photos/dis_collection/{{photo.id}}/">取消收藏</a>
+		{%endif%}
+	{% endif %}
+		{%if can_edit%}
+		<br/>
+		<a href="/photos/edit/{{photo.id}}/">编辑</a>
+		&nbsp;&nbsp;
+		<a href="/photos/delete/{{photo.id}}/">删除</a>
+		{%endif%}
+		{%if user.is_superuser%}
+		{%if photo.is_show%}
+		&nbsp;&nbsp;
+		<a href="/photos/hidden/{{photo.id}}/">隐藏</a>
+		{%else%}
+		&nbsp;&nbsp;
+		<a href="/photos/show/{{photo.id}}/">显示</a>
+		{%endif%}
+		&nbsp;&nbsp;
+		<a href="/photos/recommend/{{photo.id}}/">推荐</a>
+		{%endif%}
+	</p>
+</div>
+
+<div class="panel">
+	<h3>相关Tags</h3>
+	<p class="smalltxt">
+{% for tag in photo.get_sorted_tags %}
+<a href="/tags/{{tag.id}}/">{{tag.name}}</a>({{tag.obj_count}}) 
+{% endfor %}
+	</p>
+</div>
+
+<div class="iconlist">
+	<h3 class="heading">vicalloy的其他图片</h3>
+<ul>
+{% for o in user_s_other_photo %}
+	<li>
+	    <a href="/photos/{{o.id}}/">
+	    <img src="{{o.thumb_small_photo_url}}">
+	    </a>
+	</li>
+{% endfor %}
+</ul>
+<br class="clear">
+<div align="right" style="margin:5px"><a href="/space/tags/{{photo.user.id}}/">更多&gt;&gt;</a></div>
+</div>
+
+</div>
+
+<div align="middle">
+<script type="text/javascript"><!--
+google_ad_client = "pub-1202544506787955";
+google_ad_width = 200;
+google_ad_height = 200;
+google_ad_format = "200x200_as";
+google_ad_type = "text";
+google_ad_channel = "";
+google_color_border = "336699";
+google_color_bg = "FFFFFF";
+google_color_link = "0000FF";
+google_color_text = "000000";
+google_color_url = "008000";
+google_ui_features = "rc:6";
+//-->
+</script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+{% endblock %}

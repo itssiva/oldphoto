@@ -1,0 +1,62 @@
+{% extends "./space/base_space.html" %}
+{% block title %}
+老照片 - {{view_user.username}}的个人首页
+{% endblock %}
+
+{% block layoutmid %}
+<p class="greentitle"> {{view_user}}的图片 </p>
+<br/>
+<table width="680px">
+  <tr>
+    <td>
+	<div class="piclist">
+	<ul>
+	{% for o in self_photos %}
+		<li>
+            <div>
+		    <a href="/photos/{{o.id}}/">
+		    <img src="{{o.thumb_big_photo_url}}" alt="{{o.title}}"></a>
+            <br>
+            <a>浏览({{o.view_count}})</a> | <a>回复({{o.rep_count}})</a>
+            </div>
+		</li>
+	{% endfor %}
+	</ul>
+	<br class="clear">
+	<div align="right"><a href="/space/tags/{{view_user.id}}/">更多&gt;&gt;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+	</div>
+	</td>
+  </tr>
+</table>
+<!-- -->
+		
+<!-- -->
+<br/>
+<p class="greentitle"> {{view_user}}的收藏 </p>
+<br/>
+<table width="680px">
+  <tr>
+    <td>
+	<div class="piclist">
+	<ul>
+{% for o in collection_photos %}
+    <li>
+              <div>
+        <a href="/photos/{{o.photo.id}}/">
+        <img src="{{o.photo.thumb_big_photo_url}}" alt="{{o.photo.title}}"></a>
+              <br>
+              <a>浏览({{o.photo.view_count}})</a> | <a>回复({{o.photo.rep_count}})</a>
+              </div>
+    </li>	
+{% endfor %}
+	</ul>
+	<br class="clear">
+	<div align="right"><a href="/space/collections/{{view_user.id}}/">更多&gt;&gt;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+	</div>
+	</td>
+  </tr>
+</table>
+<br/>
+<!-- -->
+{% endblock %}
+

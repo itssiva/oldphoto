@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}
+老照片 - 确认图片 {{photo.title}}
+{% endblock %}
+{% block ext_style %}
+#layoutmid {margin-left: 110px; min-height: 300px; margin-right: 110px;}#layoutright { width: 100px;}
+#layoutleft {width: 120px;}
+{% endblock %}
+
+{% block breadcrumb %}
+<span><a href="/">首页</a></span>&gt;
+<span><a href="/space/{{user.id}}/">个人中心</a></span>&gt;
+<span><a href="/space/photos/{{user.id}}/">我图片</a></span>&gt;
+<span id="breadcurrent">编辑图片</span> 
+{% endblock %}
+
+{% block layoutmid_content %}
+		<div id="content">
+			<div id="content_list">
+<fieldset>
+<legend>查看图片</legend>
+<div align="center">
+<a href="/photos/{{photo.id}}/"><img src="{{photo.thumb_big_photo_url}}"></img></a>
+</div>
+	<div>
+		<label style="width: 6em;">标题</label>
+		<a href="/photos/{{photo.id}}/">{{photo.title}}</a>
+    </div>
+	<div>
+		<label style="width: 6em;" for="UserEmail">标签</label>
+		{% for tag in photo.get_sorted_tags %}
+		<a href="/tags/{{tag.id}}/">{{tag.name}}</a>({{tag.obj_count}}) 
+		{% endfor %}		
+	</div>	
+  	<div>
+		<label style="width: 6em;">描述</label>
+		<table width="100%"  border="0">
+		  <tr>
+		    <td>{{photo.descn}}</td>
+		  </tr>
+		</table>
+	</div>
+	<div class="submit">
+		<a href='/photos/upload/' class="mButton">继续上传</a>
+		<a href='/photos/{{photo.id}}/' class="mButton">查看</a>
+		<a href='/space/photos/{{photo.id}}/' class="mButton">个人图片中心</a>
+	</div>
+</fieldsets>
+			</div>
+		</div>
+{% endblock %}
