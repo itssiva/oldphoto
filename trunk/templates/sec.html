@@ -1,0 +1,127 @@
+﻿{% extends "base_ext.html" %}
+{% block ext_style %}
+#layoutleft {width: 0px;}#layoutmid {margin-left: 10px; min-height: 300px; margin-right: 310px;}#layoutright { width: 300px;}
+{% endblock %}
+﻿{% block content_list %}
+<p class="greentitle"> 梦境 </p>
+<div class="item">
+	<img src="/site_media/images/sample.jpg"></img>
+<br>
+<p class="itemfrom">
+	5.0   
+	&nbsp;|&nbsp;  
+	2 个评分
+	<br>
+	浏览次数：2530
+	<br>
+    所有者: <a target="_blank" href="http://www.yeeyan.com/space/show/thunder">雷声大雨点大</a>
+	<a target="_blank" href="http://www.yeeyan.com/space/show/thunder">
+		<img class="avatar" src="23_files/4.jpg">
+	</a>
+	(<a href="http://blog.yeeyan.com/" rel="nofollow" target="_blank">Blog</a>)
+    &nbsp;|&nbsp;
+	发表时间：08/14/2006
+	<br>
+	tags：<a>测试</a> <a>人物</a>  
+</p>
+</div>
+
+<div class="item">
+	<p class="greentitle"> 相片说明 </p>
+	<div class="itembody">
+	1988年，英国登山家Joe Simpson写了一本名叫《触摸巅峰》（译者：这是Touching the Void通用的中文翻译的书。该书讲述了在秘鲁安第斯山脉发生的一次与死神擦肩而过的登山事故。这本书颇受好评，但不太畅销，并很快就被人们淡忘了。可十年后，有趣的事发生了。Jon Krakauer写的另一部描写登山悲剧的书《进入稀薄空气》成为了畅销书。突然间读者又开始对《触摸巅峰》产生了兴趣。
+	</div>
+</div>
+
+<div class="item">
+	<h3>6条评论&nbsp;|&nbsp;<a name="beginComment" href="#newComment">添加评论</a></h3>
+	<ul class="comments">
+		<li>
+			<a href="http://www.yeeyan.com/space/show/Alexhong">
+				<img class="comment_avatar" src="/site_media/images/face.jpg">
+			</a>
+			<div class="comment">
+				<p class="commenter">
+					<a href="http://www.yeeyan.com/space/show/Alexhong">
+						hongyangchun  
+					</a>
+				</p>
+				<p class="content"> 希望能够提供PDF文件下载 </p>
+				<p class="date">
+					09/14/2006&nbsp;|&nbsp;<a href="http://hongyangchun.blogspot.com/index.html" rel="nofollow" target="_blank">Blog</a>
+				</p>
+			</div>
+		</li>
+	</ul>
+	<h3>添加评论</h3>
+	<div id="new_comment">
+		<form name="ncform" id="ncform" action="/articles/saveComment" method="post">
+			<input name="data[Comment][translation_id]" value="23" type="hidden"> 
+			<input name="data[username]" value="thunder" type="hidden"> 
+			<div class="inner">
+				<textarea name="data[Comment][content]" rows="6" cols="65" id="CommentContent"></textarea>
+				<div class="errorMsg" id="commentErrMsg" style="display: none;">评论不能是空白啊!</div>		
+				<div class="submit">
+					<a href="" name="newComment" class="mButton" onclick="submitComments(); return false;">提交</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock %}
+
+﻿{% block rightSide %}
+<div class="panel">
+	<h3>所有者</h3>
+	<p class="smalltxt">
+		<a>vicalloy</a>
+	</p>
+</div>
+<div class="iconlist">
+	<h3 class="heading">vicalloy的其他图片</h3>
+<ul>
+	<li><div>
+	    <a href="http://www.yeeyan.com/space/show/gneheix">
+	    <img src="/site_media/images/face.jpg"><br>
+	    gneheix    </a></div>
+	</li>
+	<li><div>
+	    <a href="http://www.yeeyan.com/space/show/gneheix">
+	    <img src="/site_media/images/face.jpg"><br>
+	    gneheix    </a></div>
+	</li>
+	<li><div>
+	    <a href="http://www.yeeyan.com/space/show/gneheix">
+	    <img src="/site_media/images/face.jpg"><br>
+	    gneheix    </a></div>
+	</li>
+</ul>
+<br class="clear">
+</div>
+<div class="iconlist">
+	<h3 class="heading">相关热点</h3>
+<ul>
+	<li><div>
+	    <a href="http://www.yeeyan.com/space/show/gneheix">
+	    <img src="/site_media/images/face.jpg"><br>
+	    gneheix    </a></div>
+	</li>
+	<li><div>
+	    <a href="http://www.yeeyan.com/space/show/gneheix">
+	    <img src="/site_media/images/face.jpg"><br>
+	    gneheix    </a></div>
+	</li>
+	<li><div>
+	    <a href="http://www.yeeyan.com/space/show/gneheix">
+	    <img src="/site_media/images/face.jpg"><br>
+	    gneheix    </a></div>
+	</li>
+	<li><div>
+	    <a href="http://www.yeeyan.com/space/show/gneheix">
+	    <img src="/site_media/images/face.jpg"><br>
+	    gneheix    </a></div>
+	</li>
+</ul>
+<br class="clear">
+</div>
+{% endblock %}

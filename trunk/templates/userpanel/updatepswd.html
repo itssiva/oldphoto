@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title_descn %}修改密码{% endblock %}
+
+{% block ext_style %}
+#layoutmid {margin-left: 130px; min-height: 300px; margin-right: 130px;}#layoutright { width: 120px;}
+#layoutleft {width: 120px;}
+{% endblock %}
+
+{% block breadcrumb %}
+<span><a href="/">首页</a></span>&gt;
+<span><a href="/space/{{user.id}}/">个人中心</a></span>&gt;
+<span id="breadcurrent">修改密码</span> 
+{% endblock %}
+
+﻿{% block layoutmid_content %}
+		<div id="content">
+			<div id="content_list">
+<form name="uuform" id="uuform" action="" method="post"><fieldset class="login">
+<legend>更新您的个人信息设置</legend>
+	<div>
+		<label>原始密码</label>
+		<input style="width: 10em;" type="password" name="old_pswd" maxlength="40" />
+		{% if form.old_pswd.errors %}<span style="color: #FF0000;"> *** {{ form.old_pswd.errors|join:", " }}</span>{% endif %} 
+	</div>
+ 	<div>
+		<label for="UserBlogUrl">新密码</label>
+		<input style="width: 10em;" type="password" name="new_pswd" maxlength="40" />
+		{% if form.new_pswd.errors %}<span style="color: #FF0000;"> *** {{ form.new_pswd.errors|join:", " }}</span>{% endif %} 
+	</div>
+    <div>
+    	<label for="UserBlogUrl">确认密码</label>
+    	<input style="width: 10em;" type="password" name="r_pswd" maxlength="40" />
+    	{% if form.r_pswd.errors %}<span style="color: #FF0000;"> *** {{ form.r_pswd.errors|join:", " }}</span>{% endif %} 
+    </div>	
+	 <div class="submit"> 
+	 <a href='' class="mButton" onClick="document.uuform.submit(); return false;">更新密码</a>
+	 <a class="mButton" href="javascript:history.back()">取消</a>
+	</div>	
+</fieldset>	   
+</form>
+			</div>
+		</div>
+{% endblock %}

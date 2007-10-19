@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}
+老照片 - 上传图片
+{% endblock %}
+
+{% block ext_style %}
+#layoutmid {margin-left: 110px; min-height: 300px; margin-right: 110px;}#layoutright { width: 100px;}
+#layoutleft {width: 120px;}
+{% endblock %}
+
+{% block breadcrumb %}
+<span><a href="/">首页</a></span>&gt;
+<span><a href="/space/{{user.id}}/">个人中心</a></span>&gt;
+<span><a href="/space/photos/{{user.id}}/">我图片</a></span>&gt;
+<span id="breadcurrent">上传图片</span> 
+{% endblock %}
+
+{% block layoutmid_content %}
+		<div id="content">
+			<div id="content_list">
+				<div class="myBox bgpink roundC">
+					<p>请选择要上传的图片</p>
+					<br>
+					<p>JPG、JPEG、GIF、PNG格式，单张图片不超过500K</p>
+				</div>
+<form method="post" name="sform" id="sform" action="" enctype="multipart/form-data">
+<fieldset>
+<legend>上传图片</legend>
+	<div>
+		<label style="width: 6em;">标题</label>
+		{{form.title}}
+		{% if form.title.errors %}<span style="color: #FF0000;"> *** {{ form.title.errors|join:", " }}</span>{% endif %}
+    </div>
+  	<div>
+		<label style="width: 6em;">描述</label>
+		{{form.descn}}
+		{% if form.descn.errors %}<span style="color: #FF0000;"> *** {{ form.descn.errors|join:", " }}</span>{% endif %}
+	</div>
+	<div>
+		<label style="width: 6em;" for="UserEmail">标签</label>
+		{{form.txt_tags}}
+		<span>使用空格进行分割，如“人物 名人 民国”</span>
+		{% if form.txt_tags.errors %}<span style="color: #FF0000;"> *** {{ form.txt_tags.errors|join:", " }}</span>{% endif %}
+	</div>
+	<div>
+		<label style="width: 6em;" for="UserEmail">图片</label>
+		{{form.photo}}
+		{% if form.photo.errors %}<span style="color: #FF0000;"> *** {{ form.photo.errors|join:", " }}</span>{% endif %}		
+	</div>
+	<div class="submit">
+		<a href='' class="mButton" onClick="document.sform.submit(); return false;">开始上传</a>
+		<a class="mButton" href="javascript:history.back()">取消</a>
+	</div>
+</fieldsets>
+</form>
+			</div>
+		</div>
+{% endblock %}

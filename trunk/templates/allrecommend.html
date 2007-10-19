@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title_descn %}推荐图片{% endblock %}
+
+{% block ext_style %}
+#layoutmid {margin-left: 40px; min-height: 300px; margin-right: 40px;}#layoutright { width: 30px;}
+#layoutleft {width: 60px;}
+{% endblock %}
+
+{% block layoutmid %}
+<div id="content">
+<div class="bggrey roundC myBox">
+<h3>推荐图片</h3>
+</div>
+<br/>
+	<div class="piclist">
+	<ul>
+	{% for o in object_list %}
+		<li>
+            <div>
+		    <a href="/photos/{{o.photo.id}}/">
+		    <img src="{{o.photo.thumb_big_photo_url}}" alt="{{o.photo.title}}"></a>
+            <br>
+		    <a>浏览({{o.photo.view_count}})</a> | <a>回复({{o.photo.rep_count}})</a>
+            </div>
+		</li>
+	{% endfor %}
+	</ul>
+	<br class="clear">
+	</div>
+<form method="get" name="pform" action="">
+<div id="pagination" style="float:right">
+	<a>{{page}}/{{pages}} 页</a>
+	<input name="page" size="4" maxlength="255" value="1" id="pg" type="text">
+	<em onclick="document.pform.submit(); return false;">GO</em>
+</div>
+</form>
+<div id="pagination">
+	{% if has_previous %}
+		<a href="/allrecommends/?page=1">首页</a>
+		<a href="/allrecommends/?page={{ previous }}">上一页</a>
+	{% endif %} {% if has_next %}
+		<a href="/allrecommends/?page={{ next }}">下一页</a>
+		<a href="/allrecommends/?page={{pages}}">尾页</a>	
+	{% endif %}	
+</div>
+</div>
+{% endblock %}

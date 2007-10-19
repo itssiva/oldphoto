@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title_descn %}注册{% endblock %}
+
+{% block ext_style %}
+#layoutmid {margin-left: 130px; min-height: 300px; margin-right: 130px;}#layoutright { width: 120px;}
+#layoutleft {width: 120px;}
+{% endblock %}
+﻿{% block layoutmid_content %}
+		<div id="content">
+			<div id="content_list">
+				<div class="myBox bgpink roundC">
+					<p>注册只要1步</p>
+					<br>
+					<p>请花10秒钟填写下面的内容， 按"完成注册"键。</p>
+				</div>
+<form name="sform" id="sform" action="/userpanel/signup/" method="post"> 
+<fieldset class="login">
+<legend>加入老照片</legend>
+  		<div>
+			<label>选一个名号</label>
+			{{form.username}}
+			{% if form.username.errors %}<span style="color: #FF0000;"> *** {{ form.username.errors|join:", " }}</span>{% endif %}
+			<span>这是您在老照片的名号；限制最多16个字符</span>
+		</div>
+		<div>
+			<label>密码</label>
+			<input style="width: 10em;" type="password" name="password" maxlength="40" />
+ 			{% if form.password.errors %}<span style="color: #FF0000;"> *** {{ form.password.errors|join:", " }}</span>{% endif %}		
+			<span>密码用于您以后登录。限制最多16个字符</span>
+    	</div>
+ 		<div>
+ 		  	<label for="UserRpassword">重复一遍密码</label>
+			<input style="width: 10em;" type="password" name="rpassword" maxlength="40" />
+ 			{% if form.rpassword.errors %}<span style="color: #FF0000;"> *** {{ form.rpassword.errors|join:", " }}</span>{% endif %}
+			<span>以免您第一次密码输入有误。</span>
+		</div>
+	<div class="submit">
+		<input class="mButton" id="submit" type="submit" name="sa" value="完成注册"/> 
+    </div>
+</fieldset>	   
+</form>
+			</div>
+		</div>
+{% endblock %}

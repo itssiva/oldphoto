@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}
+老照片 - {{view_user.username}}的标签{% if tag %} - {{tag.name}}{% endif %}
+{% endblock %}
+
+{% block ext_style %}
+#layoutmid {margin-left: 20px; min-height: 300px; margin-right: 210px;}#layoutright { width: 200px;}
+#layoutleft {width: 10px;}
+{% endblock %}
+
+﻿{% block layoutright %}	
+<div class="userprofile bglb roundC">
+<ul>
+  <li><a href="/space/{{view_user.id}}/"><img class="img_border" src="{{view_user.get_profile.get_avatar}}"></a>
+  <a href="/space/{{view_user.id}}/"> {{view_user}} </a>
+  </li>
+  <li>
+{% if is_self %}
+  <a href="/userpanel/avatar/"> 更换头像</a>
+{% endif %}
+  </li>
+{% if not is_self and user.is_authenticated %}
+  {% if not friend %}
+  <li><a href="/space/add_friend/{{view_user.id}}/">把{{view_user.username}}加为好友</a></li>
+  {% else %}
+  <li><a href="/space/drop_friend/{{friend.id}}/">取消与{{view_user.username}}的朋友关系</a></li>
+  {% endif %}
+  <li><a href="/msgbox/compose_message/{{view_user.id}}/">给{{view_user.username}}写信</a></li>
+{% endif %}
+</ul>
+</div>
+
+<br/>
+<div class="homeBox" id="tag_box">
+<h3>{{view_user.username}}的标签</h3>
+{% for t in usertags %}
+<a href="/space/tags/{{view_user.id}}/{{t.id}}/">{{t.name}}</a>({{t.obj_count}})&nbsp;
+{% endfor %}
+</div>
+
+{% endblock %}
+
+{% block layoutmid %}
+
+<div id="breadcrumb">
+<span><a href="/">首页</a></span>&gt;
+<span><a href="/space/{{view_user.id}}/">个人中心</a></span>&gt;
+<span><a href="/space/tags/{{view_user.id}}/">Tags</a></span>
+{% if tag %}&gt;<a href="/space/tags/{{view_user.id}}/{{tag.id}}">{{tag.name}}</a>/{% endif %}
+</div>
+
+<br/>
+<table>
+  <tr>
+    <td>
+	<div class="piclist">
+	<ul>
+	{% for o in object_list %}
+		<li>
+		          <div>
+		    <a href="/photos/{{o.id}}/">
+		    <img src="{{o.thumb_big_photo_url}}" alt="{{o.title}}"></a>
+		          <br>
+		          <a>浏览({{o.view_count}})</a> | <a>回复({{o.rep_count}})</a>
+		          </div>
+		</li>		
+	{% endfor %}
+	</ul>
+	<br class="clear">
+	</div>
+	</td>
+  </tr>
+</table>
+<form method="get" name="pform" action="">
+<div id="pagination" style="float:right">
+	<a>{{page}}/{{pages}} 页</a>
+	<input name="page" size="4" maxlength="255" value="1" id="pg" type="text">
+	<em onclick="document.pform.submit(); return false;">GO</em>
+</div>
+</form>
+<div id="pagination">
+	{% if has_previous %}
+		<a href="/space/photos/{{view_user.id}}/?page=1">首页</a>
+		<a href="/space/photos/{{view_user.id}}/?page={{ previous }}">上一页</a>
+	{% endif %} {% if has_next %}
+		<a href="/space/photos/{{view_user.id}}/?page={{ next }}">下一页</a>
+		<a href="/space/photos/{{view_user.id}}/?page={{pages}}">尾页</a>	
+	{% endif %}
+</div>
+<!-- -->
+
+{% endblock %}

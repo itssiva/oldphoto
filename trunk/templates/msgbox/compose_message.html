@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}
+站内消息 - 发消息
+{% endblock %}
+{% block ext_style %}
+#layoutmid {margin-left: 70px; min-height: 300px; margin-right: 70px;}#layoutright { width: 60px;}
+#layoutleft {width: 60px;}
+{% endblock %}
+
+{% block ext_js_head %}
+function sendMessage(){
+	document.getElementById("action").value = "send";
+	document.msform.submit();
+}
+{% if xxxx %}
+function saveMessage() {
+ 	document.getElementById("action").value = "save";
+	document.msform.submit();
+}
+{% endif %}
+{% endblock %}
+
+{% block breadcrumb %}
+<span><a href="/">首页</a></span>&gt;
+<span><a href="/space/{{user.id}}/">个人中心</a></span>&gt;
+<span id="breadcurrent">发消息</span> 
+{% endblock %}
+
+{% block layoutmid_content %}
+		<div id="content">
+			<div id="content_list">
+<div id="second_nav" class="bgyw roundC">
+<li>写信件</li>
+<li>|</li>
+<li><a href="/msgbox/inbox">我的信箱</a></li>
+<li>|</li>
+<li><a href="/msgbox/outbox">已寄出信件</a></li>
+</div>
+
+<div class="space_assets">
+	<form name="msform" id="msform" action="" method="post">
+	<input id="action" name="action" value="" type="hidden">
+<ul class="msgtitle">
+<li>
+	<div>收信人：</div>
+	{% if to_user %}
+	{{to_user.username}}
+	<input id="id_rec_user" name="rec_user" value="{{to_user.id}}" type="hidden">
+	{% else %}
+	{{form.rec_user}}
+	{% endif %}
+	{% if form.rec_user.errors %}<span style="color: #FF0000;"> *** {{ form.rec_user.errors|join:", " }}</span>{% endif %} 
+</li>
+<li>
+	<div>主题：</div>
+	{{form.title}}
+	{% if form.title.errors %}<span style="color: #FF0000;"> *** {{ form.title.errors|join:", " }}</span>{% endif %} 
+</li>
+<li>
+	<div>内容：</div>
+	{{form.content}}
+	{% if form.content.errors %}<span style="color: #FF0000;"> *** {{ form.content.errors|join:", " }}</span>{% endif %} 
+</li>
+</ul>
+<div class="submit">
+<a href="" name="send" class="mButton" onclick="sendMessage(); return false;">发送</a>
+{% if xxxx %}
+<a href="" name="save" class="mButton" onclick="saveMessage(); return false;">保存</a>
+{% endif %}
+ <a class="mButton" href="javascript:history.back()">返回前一页</a>		</div>
+	</form>
+</div>
+
+			</div>
+		</div>
+{% endblock %}

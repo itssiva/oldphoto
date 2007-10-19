@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}
+老照片 - Tags{% if tag %} - {{tag.name}}{% endif %}
+{% endblock %}
+
+{% block ext_style %}
+#layoutmid {margin-left: 20px; min-height: 300px; margin-right: 210px;}#layoutright { width: 200px;}
+#layoutleft {width: 10px;}
+{% endblock %}
+
+{% block layoutmid %}
+<!-- -->
+		<p class="greentitle">
+			浏览/<a href="/tags/">Tags</a>/
+			{% if tag %}<a href="/tags/{{tag.id}}">{{tag.name}}</a>/{% endif %}
+		</p>
+		<br/>
+<table>
+  <tr>
+    <td>
+	<div class="piclist">
+	<ul>
+	{% for o in object_list %}
+		<li>
+		          <div>
+		    <a href="/photos/{{o.id}}/">
+		    <img src="{{o.thumb_big_photo_url}}" alt="{{o.title}}"></a>
+		          <br>
+		          <a>浏览({{o.view_count}})</a> | <a>回复({{o.rep_count}})</a>
+		          </div>
+		</li>		
+	{% endfor %}	
+	</ul>
+	<br class="clear">
+	</div>
+	</td>
+  </tr>
+</table>
+<form method="get" name="pform" action="">
+<div id="pagination" style="float:right">
+	<a>{{page}}/{{pages}} 页</a>
+	<input name="page" size="4" maxlength="255" value="1" id="pg" type="text">
+	<em onclick="document.pform.submit(); return false;">GO</em>
+</div>
+</form>
+<div id="pagination">
+{% if has_previous %}
+	<a href="/tags/{% if tag %}{{tag.id}}/{% endif %}?page=1">首页</a>
+	<a href="/tags/{% if tag %}{{tag.id}}/{% endif %}?page={{ previous }}">上一页</a>
+{% endif %} {% if has_next %}
+	<a href="/tags/{% if tag %}{{tag.id}}/{% endif %}?page={{ next }}">下一页</a>
+	<a href="/tags/{% if tag %}{{tag.id}}/{% endif %}?page={{pages}}">尾页</a>	
+{% endif %}
+</div>
+<!-- -->
+{% endblock %}
+
+{% block layoutright %}
+<br/>
+<div class="homeBox" id="tag_box">
+<h3>热点标签</h3>
+{% for t in side_tags %}
+<a href="/tags/{{t.id}}/" style="font-size: {{t.em}}em;">{{t.name}}</a>&nbsp;
+{% endfor %}
+</div>
+{% endblock %}
