@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block meta_ext %}
-<meta name="verify-v1" content="dFjUB/7KYz4PTPNozIf5GhY4y3ugefh9xm/1V4zlk30=" />
+
 {% endblock %}
 
 {% block ext_style %}
@@ -14,7 +14,7 @@
 <div class="homeBox bggrey">
 <h3>什么是老照片</h3>
 <div class="itembody bgwhite roundSC">
-  <p>照片是凝固的历史，分享老照片，触摸岁月的痕迹。<br/>老照片是一个分享老照片的社区，在这里你可以分享任何有历史味道图片。包括老照片，老剧照，古董等。<a href="http://www.lzpian.com/userpanel/signup/">请加入我们</a>
+  <p>照片是凝固的历史，分享老照片，触摸岁月的痕迹。<br/>老照片是一个分享老照片的社区，在这里你可以分享任何有历史味道图片。包括老照片，老剧照，古董等。<a href="/userpanel/signup/">请加入我们</a>
 </p>
 </div>
 </div>
@@ -22,7 +22,7 @@
 <div class="homeBox" id="tag_box">
 <h3>热点标签</h3>
 {% for t in side_tags %}
-<a href="http://www.lzpian.com/tags/{{t.id}}/" style="font-size: {{t.em}}em;">{{t.name}}</a>&nbsp;
+<a href="/tags/{{t.id}}/" style="font-size: {{t.em}}em;">{{t.name}}</a>&nbsp;
 {% endfor %}
 </div>
 
@@ -39,7 +39,7 @@
 	{% for o in recommend_photos %}
 		<li>
             <div>
-		    <a href="http://www.lzpian.com/photos/{{o.photo.id}}/">
+		    <a href="/photos/{{o.photo.id}}/">
 		    <img src="{{o.photo.thumb_big_photo_url}}" alt="{{o.photo.title}}"></a>
             <br>
 		    <a>浏览({{o.photo.view_count}})</a> | <a>回复({{o.photo.rep_count}})</a>
@@ -48,7 +48,7 @@
 	{% endfor %}
 	</ul>
 	<br class="clear">
-	<div align="right"><a href="http://www.lzpian.com/allrecommends/">更多&gt;&gt;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+	<div align="right"><a href="/allrecommends/">更多&gt;&gt;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
 	</div>
 	</td>
   </tr>
@@ -66,7 +66,7 @@
 	{% for o in new_photos %}
 		<li>
             <div>
-		    <a href="http://www.lzpian.com/photos/{{o.id}}/">
+		    <a href="/photos/{{o.id}}/">
 		    <img src="{{o.thumb_big_photo_url}}" alt="{{o.title}}"></a>
             <br>
             <a>浏览({{o.view_count}})</a> | <a>回复({{o.rep_count}})</a>
@@ -75,7 +75,7 @@
 	{% endfor %}
 	</ul>
 	<br class="clear">
-	<div align="right"><a href="http://www.lzpian.com/allnewphotos/">更多&gt;&gt;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+	<div align="right"><a href="/allnewphotos/">更多&gt;&gt;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
 	</div>
 	</td>
   </tr>
@@ -92,7 +92,7 @@
 {% for o in hot_photos %}
     <li>
               <div>
-        <a href="http://www.lzpian.com/photos/{{o.id}}/">
+        <a href="/photos/{{o.id}}/">
         <img src="{{o.thumb_big_photo_url}}" alt="{{o.title}}"></a>
               <br>
               <a>浏览({{o.view_count}})</a> | <a>回复({{o.rep_count}})</a>
@@ -101,7 +101,7 @@
 {% endfor %}
 	</ul>
 	<br class="clear">
-	<div align="right"><a href="http://www.lzpian.com/allhotphotos/">更多&gt;&gt;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+	<div align="right"><a href="/allhotphotos/">更多&gt;&gt;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
 	</div>
 	</td>
   </tr>
