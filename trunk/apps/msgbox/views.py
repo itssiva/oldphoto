@@ -22,13 +22,13 @@ def compose_message(request, to_user_id=None):
     if to_user_id:
         to_user=User.objects.get(pk=to_user_id)
         context_map['to_user']=to_user
-        friends=(to_user,)
+        friends=((to_user.id, to_user.username),)
     context_map['user']=user
     if not friends:
         friends=get_friends(user)
     form=ComposeMessageForm(friends=friends)
     if request.POST:
-        form = ComposeMessageForm(request.POST,get_friends(user),user)
+        form = ComposeMessageForm(request.POST,friends,user)
         if form.is_valid():
             if request.POST['action']=='save':
                 form.save_draft()
