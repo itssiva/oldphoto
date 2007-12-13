@@ -21,7 +21,8 @@ def upload_photo(photo, ext):
     #如果文件夹不存在，创建文件夹
     if not os.path.exists(path):
         os.mkdir(path)
-    filename=str(random.randrange(0,99999999999999999999,1))+'.'+ext
+    import time
+    filename=str(time.time())+str(random.randrange(0,99999,1))+'.'+ext
     ret_filename=sub_folder_name + '/' + filename
     filename=path+filename
     thumb_big_filename=filename.replace('.','_thumb_big.')
