@@ -22,7 +22,7 @@ def upload_photo(photo, ext):
     if not os.path.exists(path):
         os.mkdir(path)
     import time
-    filename=str(time.time())+str(random.randrange(0,99999,1))+'.'+ext
+    filename=str(time.time()).replace('.','_')+str(random.randrange(0,99999,1))+'.'+ext
     ret_filename=sub_folder_name + '/' + filename
     filename=path+filename
     thumb_big_filename=filename.replace('.','_thumb_big.')
