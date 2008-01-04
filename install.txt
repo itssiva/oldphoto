@@ -1,4 +1,33 @@
-°²×°ËµÃ÷
-    ³ÌĞòĞèÒªPILµÄÖ§³Ö£¬ÇëÏÈ°²×°PILÄ£¿é¡£
-    ĞŞ¸Äsettings.pyÖĞµÄÊı¾İ¿âÅäÖÃ£¬²¢ÔËĞĞsyncdb.bat¶ÔÊı¾İ¿â½øĞĞ³õÊ¼»¯¡£
-    ĞŞ¸ÄMEDIA_ROOT½«ÆäÅäÖÃ³É×ÊÔ´ÎÄ¼şÂ·¾¶£¬ÉÏ´«µÄÍ¼Æ¬ÎÄ¼ş½«±£³ÖÔÚ¸ÃÂ·¾¶ÖĞ¡£
+ï»¿Introduction
+
+A web site for share photo, powerd by Django.
+
+You can get the source from svn(http://oldphoto.googlecode.com/svn/trunk/), and see the demo on http://www.lzpian.com/.
+Requirements
+
+   1. Python
+   2. Django
+   3. PIL 
+
+Install
+
+    * Change the db setting in settings.py, and run syncdb.bat to init db.
+    * Change MEDIA_ROOT to set the resource path, where the uploaded photo will save. 
+
+ä»‹ç»
+
+ä½¿ç”¨Djangoå¼€å‘çš„ç…§ç‰‡åˆ†äº«ç½‘ç«™ã€‚
+
+ä»£ç åœ¨SVNä¸­(http://oldphoto.googlecode.com/svn/trunk/)ã€‚
+
+ä½ å¯ä»¥è®¿é—®http://www.lzpian.com/ æŸ¥çœ‹æ¼”ç¤ºã€‚
+æ‰€éœ€ç»„ä»¶
+
+   1. Python
+   2. Django
+   3. PIL 
+
+å®‰è£…
+
+    * ä¿®æ”¹settings.pyä¸­çš„æ•°æ®åº“é…ç½®ï¼Œå¹¶è¿è¡Œsyncdb.batå¯¹æ•°æ®åº“è¿›è¡Œåˆå§‹åŒ–ã€‚
+    * ä¿®æ”¹MEDIA_ROOTå°†å…¶é…ç½®æˆèµ„æºæ–‡ä»¶è·¯å¾„ï¼Œä¸Šä¼ çš„å›¾ç‰‡æ–‡ä»¶å°†ä¿æŒåœ¨è¯¥è·¯å¾„ä¸­ã€‚ 
