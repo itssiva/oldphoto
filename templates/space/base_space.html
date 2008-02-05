@@ -58,6 +58,7 @@
 	</ul>
 </div>
 
+{% if is_self %}
 <div class="usernews bggrey roundC">
 <h3 class="heading">{{view_user}}图片的新留言</h3>
 <ul>
@@ -67,6 +68,7 @@
 </ul>
 <div align="right"><a href="/space/all_4me_comments/{{view_user.id}}/">更多&gt;&gt;&nbsp;</a>&nbsp;&nbsp;&nbsp;</div>
 </div>
+{% endif %}
 {% endblock %}
 
 {% block layoutmid %}

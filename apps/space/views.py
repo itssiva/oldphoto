@@ -15,15 +15,15 @@ def init_context(request, user_id=0, context_map={}):
     user = request.user
     context_map['user'] = user
     view_user = user
-    context_map['r_c'] = PhotoComment.objects.extra(
-        params=[user.id],
-        tables=['photos_photo'],
-        where=['photo_id=photos_photo.id and photos_photo.user_id=%s'])[:5]
     if user_id:
         view_user = User.objects.get(pk=user_id)
     context_map['view_user'] = view_user
     if user.id==view_user.id:
         context_map['is_self']=True
+        context_map['r_c'] = PhotoComment.objects.extra(
+            params=[user.id],
+            tables=['photos_photo'],
+            where=['photo_id=photos_photo.id and photos_photo.user_id=%s'])[:5]
     else:
         try:
             friend=Friend.objects.get(user=user,friend=view_user)
