@@ -1,4 +1,4 @@
-﻿# -*- coding: UTF-8 -*-
+# -*- coding: UTF-8 -*-
 from django.db import models
 from apps.photos.models import Photo
 
@@ -7,7 +7,7 @@ class RecommendPhoto(models.Model):
     推荐照片
     """
     photo = models.ForeignKey(Photo)
-    title = models.CharField(maxlength=100, blank=True)#标题
+    title = models.CharField(max_length=100, blank=True)#标题
     descn = models.TextField(blank=True)#描述
     modification_date = models.DateTimeField(auto_now_add = True)
     create_date = models.DateTimeField(auto_now_add = True)

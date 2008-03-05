@@ -2,7 +2,6 @@ from django.conf.urls.defaults import *
 
 # Myghtyboard URLs
 urlpatterns = patterns('apps.photos',
-                       (r'^$', 'views.index'),
                        (r'^upload/$', 'views.upload'),
                        (r'^edit/(?P<id>\d+)/$', 'views.edit'),
                        (r'^hidden/(?P<id>\d+)/$', 'views.hidden'),

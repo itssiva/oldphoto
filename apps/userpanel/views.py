@@ -74,6 +74,7 @@ def updatepswd(request, next_page=None):
         form = UpdatePswdForm(request.POST, u)
         if form.is_valid():
             u.set_password(form.cleaned_data['new_pswd'])
+            u.save()
             return HttpResponseRedirect('/space/')
     context_map['form']=form
     return render_to_response('userpanel/updatepswd.html',context_map)

@@ -35,7 +35,8 @@
 <ul class="orange_bullet">
 	<li><a href="/userpanel/updatepswd/"> 修改密码</a></li>
 	<li><a href="/userpanel/edit/">更新个人信息	</a></li>
-	<li><a href="/msgbox/inbox/">我的信箱(0封未读)</a></li>
+    {% load msgtags %}
+	<li><a href="/msgbox/inbox/">我的信箱({% new_msg_count %}封未读)</a></li>
 	<li><a href="/photos/upload/"><b class="red">上传照片</b></a></li>
 </ul>
 </div>
