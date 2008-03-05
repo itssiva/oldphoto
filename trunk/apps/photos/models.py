@@ -10,11 +10,11 @@ class Photo(models.Model):
     """
     图片
     """
-    title = models.CharField(maxlength=100)
+    title = models.CharField(max_length=100)
     descn = models.TextField(blank=True)
     tags = models.ManyToManyField(Tag)
     txt_tags = models.TextField(blank=True)
-    photo_url = models.CharField(maxlength=255, blank=True)
+    photo_url = models.CharField(max_length=255, blank=True)
 
     user = models.ForeignKey(User)
 
@@ -26,7 +26,7 @@ class Photo(models.Model):
 
     show_type = models.CharField('显示',\
         choices=(('s', '显示'), ('h', '隐藏')),
-        maxlength=1, radio_admin=True, default='s')
+        max_length=1, radio_admin=True, default='s')
 
     def __str__(self):
         return self.title
@@ -175,7 +175,7 @@ class PhotoComment(models.Model):
 
     show_type = models.CharField('显示',\
         choices=(('s', '显示'), ('h', '隐藏')),
-        maxlength=1, radio_admin=True, default='s')
+        max_length=1, radio_admin=True, default='s')
 
     def is_show(self):
         if self.show_type=='s':
@@ -205,7 +205,7 @@ class UserTag(models.Model):
     受交叉引用的影响，无法放在tag的models下
     """
     user = models.ForeignKey(User)
-    name = models.CharField(maxlength=50)
+    name = models.CharField(max_length=50)
     descn = models.TextField(blank=True)
     photos = models.ManyToManyField(Photo)
     obj_count = models.IntegerField(default=0)

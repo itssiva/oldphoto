@@ -1,9 +1,9 @@
-﻿# -*- coding: UTF-8 -*-
+# -*- coding: UTF-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
 
 class Tag(models.Model):
-    name = models.CharField(maxlength=50)
+    name = models.CharField(max_length=50)
     obj_count = models.IntegerField(default=0)
     view_count = models.IntegerField(default=0)
 

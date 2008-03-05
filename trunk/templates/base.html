@@ -40,7 +40,8 @@
     <li><img src="/site_media/images/div.gif"></li>
     <li><a href="/userpanel/signup/">注册</a></li>
 {% else %}
-    <li><img src="/site_media/images/email.gif">(<a href="/msgbox/inbox/">{{new_mail_count}}封未读</a>)</li>
+    {% load msgtags %}
+    <li><img src="/site_media/images/email.gif">(<a href="/msgbox/inbox/">{% new_msg_count %}封未读</a>)</li>
     <li><a href="/userpanel/logout/">退出</a></li>
 {% endif %}
     <li><img src="/site_media/images/div.gif"></li>

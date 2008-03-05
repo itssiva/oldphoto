@@ -13,12 +13,12 @@ def txt2set(s):
 def get_base_context_map(request, ext_context_map={}):
     user=request.user
     ext_context_map['user']=request.user
-    if user.is_authenticated():
-        ext_context_map['new_mail_count']=get_count("""
-            select count(*) from msgbox_message
-            where rec_user_id=%s and msgbox_message.read='u'
-            and type='r'  """,
-            (user.id,))
+    #if user.is_authenticated():
+    #    ext_context_map['new_mail_count']=get_count("""
+    #        select count(*) from msgbox_message
+    #        where rec_user_id=%s and msgbox_message.read='u'
+    #        and type='r'  """,
+    #        (user.id,))
     return ext_context_map
 
 
