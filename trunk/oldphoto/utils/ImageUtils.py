@@ -4,7 +4,6 @@ import Image
 import os
 from django.utils.translation import gettext as _
 from django import forms
-from StringIO import StringIO
 
 
 def checkImage(value, max_size=0):
@@ -12,17 +11,14 @@ def checkImage(value, max_size=0):
     检查上传的图片是否合法
     max_size 最大大小，单位K。0表示无限制
     """
-    #print value
-    if 'content-type' in value:
-        main, sub = value['content-type'].split('/')
-        if not (main == 'image' and sub in ['jpeg', 'gif', 'png', 'x-png']):
-            raise forms.ValidationError(_('只支持JPEG, PNG, GIF'))
+    if value.name.split('.')[-1].lower() not in ['jpeg', 'gif', 'png', 'jpg']:
+        raise forms.ValidationError(_('只支持JPEG, PNG, GIF'))
     try:
-        img = Image.open(StringIO(value['content']))
+        img = Image.open(value)
         x, y = img.size
     except:
         raise forms.ValidationError(_('无效的图形文件。'))
-    if max_size!=0 and len(value['content'])>max_size*1024:#TODO 比较文件大小
+    if max_size!=0 and value.size>max_size*1024:
         raise forms.ValidationError(_('图片大小不得大于%sK') % max_size)
 
 
