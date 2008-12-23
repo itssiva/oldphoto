@@ -1,5 +1,8 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
+from django.contrib import admin
+
+admin.autodiscover()
 
 urlpatterns = patterns('',
     # Example:
@@ -7,7 +10,9 @@ urlpatterns = patterns('',
     #(r'^avatar/(.*)$', 'django.views.static.serve',{'document_root': settings.SITE_AVATAR}),
     #(r'^style/(.*)$', 'django.views.static.serve',{'document_root': settings.SITE_STYLE}),
     #(r'^images/(.*)$', 'django.views.static.serve',{'document_root': settings.SITE_IMAGES}),
-    (r'^site_media/(.*)$', 'django.views.static.serve', {'document_root': './media'}),
+    # Uncomment this for admin:
+    ('^admin/(.*)', admin.site.root),
+    (r'^site_media/(.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     (r'^userpanel/', include('oldphoto.userpanel.URLconf')),
     (r'^space/', include('oldphoto.space.URLconf')),
     (r'^photos/', include('oldphoto.photos.URLconf')),
@@ -24,6 +29,4 @@ urlpatterns = patterns('',
     (r'^allhotphotos/$', 'oldphoto.portal.views.allhotphotos'),
     (r'^allnewphotos/$', 'oldphoto.portal.views.allnewphotos'),
     (r'^search/$', 'oldphoto.portal.views.search'),
-    # Uncomment this for admin:
-    (r'^admin/', include('django.contrib.admin.urls')),
 )

@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 from oldphoto.photos.models import Photo
+from django.contrib import admin
 
 #用户附加信息
 #信箱
@@ -34,6 +35,7 @@ class UserProfile(models.Model):
             a = str(self.id)+'.jpg';
         return settings.AVATAR_URL_PREFIX + a
 
+admin.site.register(UserProfile)
 
 class CollectionPhoto(models.Model):
     """

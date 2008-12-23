@@ -29,7 +29,9 @@ def upload_photo(photo, ext):
     thumb_small_filename=filename.replace('.','_thumb_small.')
     #直接保存
     imgfile = open(filename, 'wb')
-    imgfile.write(photo)
+    #imgfile.write(photo)
+    for chunk in photo.chunks():
+        imgfile.write(chunk) 
     imgfile.close()
     #缩略图
     make_thumb(img=filename, filename=thumb_big_filename,\
@@ -90,8 +92,8 @@ class PhotoForm(forms.Form):
             photo = Photo()
             #上传图片
             photo.user=self.user
-            filename=upload_photo(self.cleaned_data['photo']['content'],
-                self.cleaned_data['photo']['filename'].split('.')[-1])
+            filename=upload_photo(self.cleaned_data['photo'],
+                self.cleaned_data['photo'].name.split('.')[-1])
             photo.photo_url=filename
         photo.title=self.cleaned_data['title']
         from oldphoto.utils.textconvert import plaintext2html

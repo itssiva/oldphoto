@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
+import os
+ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
+
 DATABASE_ENGINE = 'sqlite3'           # 'postgresql', 'mysql', 'sqlite3' or 'ado_mssql'.
 DATABASE_NAME = 'oldphoto.sqlite3'             # Or path to database file if using sqlite3.
 DATABASE_USER = ''             # Not used with sqlite3.
@@ -19,7 +22,8 @@ OLD_PHOTO_ROOT = ''
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ''
+
+MEDIA_ROOT =  os.path.join(ROOT_PATH, 'media')
 
 # URL that handles the media served from MEDIA_ROOT.
 # Example: "http://media.lawrence.com"
@@ -30,17 +34,14 @@ MEDIA_URL = ''
 # Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = '/media/'
 
-SITE_AVATAR = './media/avatar'
-SITE_STYLE = './media/style'
-SITE_IMAGES = './media/images'
 AUTH_PROFILE_MODULE = 'userpanel.UserProfile'
 
 DEFAULT_AVATAR_IMAGE = 'avatar.jpg'
 AVATAR_URL_PREFIX = '/site_media/avatar/'
-AVATAR_ROOT = MEDIA_ROOT + '/avatar/'
+AVATAR_ROOT = os.path.join(MEDIA_ROOT, 'avatar')
 
 PHOTO_URL_PREFIX = '/site_media/photo/'
-PHOTO_ROOT = MEDIA_ROOT + '/photo/'
+PHOTO_ROOT = os.path.join(MEDIA_ROOT, 'photo')
 
 MAX_PHOTO_SIZE = 500
 

@@ -1,14 +1,11 @@
 # -*- coding: UTF-8 -*-
 from django.conf import settings
-from StringIO import StringIO
 from django.shortcuts import render_to_response
-from django.template.context import RequestContext
 from oldphoto.userpanel.forms import LoginForm, SignupForm, EditForm, AvatarForm,\
     UpdatePswdForm
-from django.contrib.auth import SESSION_KEY, REDIRECT_FIELD_NAME
+from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from oldphoto.userpanel.models import UserProfile
 from oldphoto.utils import ImageUtils
 from oldphoto.utils.CommonUtils import get_base_context_map
 
@@ -97,19 +94,26 @@ def edit(request):
     context_map['form']=form
     return render_to_response('userpanel/edit.html',context_map)
 
-
 def upload_avatar(img, userid):
     """
     上传头像
     img 图像stream或文件名
     ext 文件的后缀
     """
-    filename=settings.AVATAR_ROOT + str(userid) + '.jpg'
+    import os
+    filename = os.path.join(settings.AVATAR_ROOT, str(userid) + '.jpg')
     ImageUtils.make_thumb(img=img, filename=filename, size=48, square=True)
-
 
 @login_required
 def avatar(request):
+    def save_tmp_img(img):
+        import os
+        filename = os.path.join(settings.ROOT_PATH, 'tmp_img.tmp')
+        imgfile = open(filename, 'wb')
+        for chunk in img.chunks():
+            imgfile.write(chunk) 
+        imgfile.close()
+        return filename    
     context_map=get_base_context_map(request)
     user = request.user
     form = AvatarForm()#user.get_profile().__dict__
@@ -119,7 +123,9 @@ def avatar(request):
             clean_data=form.cleaned_data
             if clean_data['avatar']:
                 avatar = clean_data['avatar']
-                upload_avatar(StringIO(avatar['content']),user.id)
+                #FIXME move the tmp img
+                tmp_img = save_tmp_img(avatar)
+                upload_avatar(tmp_img,user.id)
                 user.get_profile().avatar=str(user.id)+'.jpg'
             else:
                 user.get_profile().avatar=''
