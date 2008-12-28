@@ -17,16 +17,18 @@ def upload_photo(photo, ext):
     ext=filename.split('.')[-1]
     """
     sub_folder_name=str(random.randint(0,100))
-    path=settings.PHOTO_ROOT + sub_folder_name + '/'
+    path=os.path.join(settings.PHOTO_ROOT, sub_folder_name)
     #如果文件夹不存在，创建文件夹
     if not os.path.exists(path):
         os.mkdir(path)
     import time
     filename=str(time.time()).replace('.','_')+str(random.randrange(0,99999,1))+'.'+ext
-    ret_filename=sub_folder_name + '/' + filename
-    filename=path+filename
+    ret_filename=os.path.join(sub_folder_name, filename)
     thumb_big_filename=filename.replace('.','_thumb_big.')
     thumb_small_filename=filename.replace('.','_thumb_small.')
+    filename=os.path.join(path, filename)
+    thumb_big_filename=os.path.join(path, thumb_big_filename)
+    thumb_small_filename=os.path.join(path, thumb_small_filename)
     #直接保存
     imgfile = open(filename, 'wb')
     #imgfile.write(photo)

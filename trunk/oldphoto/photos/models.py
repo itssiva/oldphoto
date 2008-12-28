@@ -60,10 +60,16 @@ class Photo(models.Model):
             self.photo_url
 
     def thumb_big_photo_url(self):
-        return self.get_photo_url().replace('.','_thumb_big.')
+        s=self.get_photo_url()
+        pos = s.rfind('.')
+        return s[:pos]+'_thumb_big'+s[pos:]
+        #return self.get_photo_url().replace('.','_thumb_big.')
 
     def thumb_small_photo_url(self):
-        return self.get_photo_url().replace('.','_thumb_small.')
+        s=self.get_photo_url()
+        pos = s.rfind('.')
+        return s[:pos]+'_thumb_small'+s[pos:]
+        #return self.get_photo_url().replace('.','_thumb_small.')
 
     def photo_name(self):
         if not self.photo_url:
